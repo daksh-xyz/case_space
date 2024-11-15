@@ -1,0 +1,9 @@
+npm create-next-app@canary
+npm install next-auth@beta
+npx auth secret (also creates .env.local)
+npm install tailwindcss-animate --legacy-peer-deps
+npm install @tailwindcss/typography --legacy-peer-deps
+npx shadcn@latest init
+npx shadcn@latest add button
+npx shadcn@latest add skeleton
+npm create sanity@latest -- --project sbyqjtto --dataset production --template clean --typescript --output-path studio-casespace
