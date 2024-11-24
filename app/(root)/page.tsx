@@ -1,20 +1,18 @@
-import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
-import IdeaCard from "@/components/IdeaCard";
+import IdeaCard, { IdeaTypeCard } from "@/components/IdeaCard";
+import { IDEAS_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { auth } from "@/auth";
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ query: string }>}) {
   const query = (await searchParams).query;
+  const params = { search: query || null };
 
-  const posts = [{
-    _createdAt: new Date(),
-    views: 55,
-    author: { _id: 1, name: "Daksh Lal" },
-    _id: 1,
-    description: "Gay",
-    image: "https://placeholder.com/600x400",
-    category: "Robots",
-    title: "We Robots"
-  },]
+  const session = await auth();
+
+  console.log(session?.id)
+
+  const { data: posts } = await sanityFetch({query: IDEAS_QUERY, params})
 
   return (
     <>
@@ -33,7 +31,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ q
 
       <ul className="mt-7 card_grid">
         {posts?.length > 0 ? (
-          posts.map((post: IdeaCardType, index: number) => (
+          posts.map((post: IdeaTypeCard ) => (
             <IdeaCard key={post?._id} post={post} />
           ))
         ) : (
@@ -42,6 +40,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ q
       </ul>
 
     </section>
+    <SanityLive />
     </>
   );
 }

@@ -3,9 +3,12 @@ import { EyeIcon } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "./ui/button"
+import { Author, Idea } from "@/sanity/types"
+
+export type IdeaTypeCard = Omit<Idea, "author"> & { author?: Author }
 
 const IdeaCard = ({ post }: { post: IdeaTypeCard }) => {
-  const {_createdAt, views, author: { _id: authorId, name }, _id , description , image, category,title} = post;
+  const {_createdAt, views, author , _id , description , image, category,title} = post;
 
   return (
     <li className='startup-card group'>
@@ -20,14 +23,14 @@ const IdeaCard = ({ post }: { post: IdeaTypeCard }) => {
         </div>
         <div className="flex-between mt-5 gap-5">
           <div className="flex-1">
-            <Link href={`/user/${authorId}`}>
-              <p className="text-16-medium line-clamp-1">{name}</p>
+            <Link href={`/user/${author?._id}`}>
+              <p className="text-16-medium line-clamp-1">{author?.name}</p>
             </Link>
             <Link href={`/project/${_id}`}>
               <h3 className="text-26-semibold line-clamp-1">{title}</h3>
             </Link>
           </div>
-          <Link href={`/user/${authorId}`}>
+          <Link href={`/user/${author?._id}`}>
             <Image src="https://placeholder.com/48x48" alt="placeholder" width={48} height={48} className="rounded-full" />
           </Link>
         </div>

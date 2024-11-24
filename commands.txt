@@ -7,3 +7,11 @@ npx shadcn@latest init
 npx shadcn@latest add button
 npx shadcn@latest add skeleton
 npm create sanity@latest -- --project sbyqjtto --dataset production --template clean --typescript --output-path studio-casespace
+npm install next-sanity@canary --legacy-peer-deps
+npx sanity@latest schema extract --path=./sanity/extract.json
+npx sanity@latest typegen generate
+npm i server-only --legacy-peer-deps
+npm install markdown-it --legacy-peer-deps
+npm i --save-dev @types/markdown-it --legacy-peer-deps
+npx shadcn@latest add input textarea toast 
+npm i @uiw/react-md-editor --legacy-peer-deps
